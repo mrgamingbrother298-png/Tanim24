@@ -28,6 +28,12 @@ class ToolRegistry(
         register(PhoneTool())
         register(SmsTool())
         register(EmailTool())
+        register(WhatsAppAutomationTool())
+        register(CallAnnouncerTool())
+
+        // Register Security & Vision tools
+        register(AntiTheftTool())
+        register(CameraVisionTool())
 
         // Register Productivity tools
         register(TimerTool())

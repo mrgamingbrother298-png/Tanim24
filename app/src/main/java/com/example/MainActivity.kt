@@ -1,8 +1,6 @@
 package com.example
 
-import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -20,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.nova.engine.PermissionManager
 import com.example.nova.ui.NovaViewModel
 import com.example.nova.ui.screens.*
 import com.example.ui.theme.NovaAiTheme
@@ -48,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     val viewModel: NovaViewModel = viewModel()
                     var currentScreen by remember { mutableStateOf(NovaScreen.MAIN) }
 
-                    // Runtime permission launcher for RECORD_AUDIO and POST_NOTIFICATIONS
+                    // Runtime permission launcher using PermissionManager
                     val permissionLauncher = rememberLauncherForActivityResult(
                         ActivityResultContracts.RequestMultiplePermissions()
                     ) { _ ->
@@ -56,16 +55,8 @@ class MainActivity : ComponentActivity() {
                     }
 
                     LaunchedEffect(Unit) {
-                        val permissionsToRequest = mutableListOf(Manifest.permission.RECORD_AUDIO)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
-                        }
-
-                        val ungranted = permissionsToRequest.filter {
-                            ContextCompat.checkSelfPermission(this@MainActivity, it) != PackageManager.PERMISSION_GRANTED
-                        }
-                        if (ungranted.isNotEmpty()) {
-                            permissionLauncher.launch(ungranted.toTypedArray())
+                        if (!PermissionManager.hasAllPermissions(this@MainActivity)) {
+                            PermissionManager.requestAllPermissions(permissionLauncher)
                         }
                     }
 

@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -143,6 +144,18 @@ fun NovaMainScreen(
 
             // Interactive NOVA Avatar & State Badge Header
             NovaAssistantStatusHeader(assistantState = assistantState)
+
+            // Aaiyra Glowing Orb Voice HUD
+            AaiyraGlowingOrb(
+                assistantState = assistantState,
+                onClick = {
+                    if (assistantState == AssistantState.LISTENING) {
+                        viewModel.stopListening()
+                    } else {
+                        viewModel.startListening()
+                    }
+                }
+            )
 
             // Conversation Chat Stream
             LazyColumn(
@@ -349,6 +362,55 @@ fun NovaAssistantStatusHeader(assistantState: AssistantState) {
                     color = NovaTextPrimary
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun AaiyraGlowingOrb(assistantState: AssistantState, onClick: () -> Unit) {
+    val infiniteTransition = rememberInfiniteTransition(label = "orb_pulse")
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.12f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1200, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "orb_scale"
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 12.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .size(130.dp)
+                .scale(if (assistantState != AssistantState.IDLE) scale else 1f)
+                .clip(CircleShape)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(Color.White, Color(0xFF806CFF), Color(0xFF251B5C))
+                    )
+                )
+                .border(2.dp, Color(0xFF705CFF), CircleShape)
+                .clickable { onClick() },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = when (assistantState) {
+                    AssistantState.LISTENING -> Icons.Default.Mic
+                    AssistantState.SPEAKING -> Icons.AutoMirrored.Filled.VolumeUp
+                    AssistantState.THINKING -> Icons.Default.AutoAwesome
+                    AssistantState.EXECUTING -> Icons.Default.FlashOn
+                    else -> Icons.Default.Assistant
+                },
+                contentDescription = "Aaiyra Orb",
+                tint = Color.White,
+                modifier = Modifier.size(44.dp)
+            )
         }
     }
 }
