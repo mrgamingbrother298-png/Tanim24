@@ -158,7 +158,7 @@ fun SettingsScreen(
                     Text("Supported Languages", fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = NovaTextPrimary)
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        "NOVA auto-detects language in both speech and text:\n" +
+                        "Aaiyra auto-detects language in both speech and text:\n" +
                         "• English (Universal)\n" +
                         "• Bengali (বাংলা) — e.g. \"আজ ৮টার জন্য একটা reminder set করো\"\n" +
                         "• Tagalog / Filipino — e.g. \"Kamusta\"\n" +
@@ -192,21 +192,28 @@ fun SettingsScreen(
                 }
             }
 
-            // About NOVA AI
+            // About Aaiyra AI
             Card(
                 colors = CardDefaults.cardColors(containerColor = NovaSurfaceCard),
                 shape = RoundedCornerShape(14.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text("NOVA AI Assistant", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = NovaNeonCyan)
-                    Text("Version 1.0.0 (Production Build)", fontSize = 12.sp, color = NovaTextMuted)
+                    Text("Aaiyra Voice Assistant", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = NovaNeonCyan)
+                    Text("Version 1.0.0 (Custom Build for Tanim)", fontSize = 12.sp, color = NovaTextMuted)
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        "A-to-Z Android Personal AI Operating Assistant built on Clean Architecture, Jetpack Compose, Room persistence, and explicit Tool-based device control.",
+                        "A witty, sassy, real-time voice assistant built using Jetpack Compose, Room database, and the Gemini API, custom-tuned with deep local system capabilities.",
                         fontSize = 12.sp,
                         color = NovaTextSecondary,
                         lineHeight = 18.sp
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        "Made by Yasin Xpertz",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = NovaNeonPurple
                     )
                 }
             }

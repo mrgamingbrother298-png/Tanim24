@@ -189,7 +189,7 @@ fun NovaTopBar(
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "NOVA AI",
+                        text = "Aaiyra",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = NovaNeonCyan,
@@ -211,7 +211,7 @@ fun NovaTopBar(
                     }
                 }
                 Text(
-                    text = "Personal Operating Assistant",
+                    text = "Tanim's Sassy Voice Assistant",
                     fontSize = 11.sp,
                     color = NovaTextMuted
                 )

@@ -68,7 +68,7 @@ class NovaViewModel(application: Application) : AndroidViewModel(application) {
                 repository.addMessage(
                     MessageEntity(
                         sender = "nova",
-                        content = "NOVA AI online. Standing by for voice or text commands with verified device tools and safety protocols.",
+                        content = "Hey Tanim... Aaiyra is online. Ready to keep you organized and entertained? Speak or type, handsome.",
                         toolType = "system_status",
                         toolStatus = "SUCCESS"
                     )
