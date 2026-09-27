@@ -1,0 +1,6 @@
+{
+  "name": "NOVA AI",
+  "description": "Full Personal AI Operating Assistant with voice, tools, safety firewall, and productivity system",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
